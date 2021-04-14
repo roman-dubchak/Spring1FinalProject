@@ -1,0 +1,69 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+   http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+
+<!--    <changeSet author="dubchak" id="drop table customer_Liq if exist">-->
+<!--        <preConditions onFail="MARK_RAN">-->
+<!--            <not>-->
+<!--                <tableExists tableName="customer_liq"/>-->
+<!--            </not>-->
+<!--        </preConditions>-->
+<!--    </changeSet>-->
+<!--        <dropTable cascadeConstraints="true"-->
+<!--                   tableName="customer_liq"/>-->
+<!--    </changeSet>-->
+
+    <changeSet author="dubchak" id="create table person_liq" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="person_liq"/>
+            </not>
+        </preConditions>
+        <createTable tableName="person_liq">
+            <column name="id" type="BIGINT"> <!--defaultValueComputed="uid.uuid_generate_v4()"-->
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="firstname" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="lastname" type="VARCHAR(255)">
+            <constraints nullable="false"/>
+            </column>
+            <column name="city" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="login" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="dubchak" id="create_5_person" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="person_liq"/>
+            </not>
+        </preConditions>
+        <comment>Create 5 person</comment>
+        <sql>insert into person_liq (firstname, lastname, city, login, password, role_id)
+            values ('Pavel', 'Ineshin', 'Rostov', 'pavel', '{noop}pavel', 1),
+            ('Marat', 'Harin', 'Ivanovo', 'marat', '{noop}marat', 1),
+            ('Vladimir', 'Kurpatov', 'Samara', 'vladimir', '{noop}vladimir', 1),
+            ('Alexander', 'Maslov', 'Krasnodar', 'alex', '{noop}alex', 3),
+            ('Irina', 'Smelova', 'Syzran', 'irina', '{noop}irina', 2),
+            ('Antov', 'Belsky', 'Tver', 'antov', '{noop}antov', 1)
+        </sql>
+    </changeSet>
+</databaseChangeLog>

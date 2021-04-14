@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+
+    <title>Cart</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+<!--    <div th:replace="~{navigation :: navigation(Cart)}" />-->
+
+    <h1>Cart page</h1>
+    <span th:if="${productincart.size() == 0}">Cart is empty</span>
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>ID Product</th>
+            <th>Title</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${productincart}">
+            <td th:text="${item.id}"/>
+            <td th:text="${item.product.id}"/>
+            <td th:text="${item.product.title}"/>
+            <td th:text="${item.product.price}"/>
+            <td><a class="btn btn-danger" th:href="@{'/cart/delete/' + ${item.id}}">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+<!--    <a class="btn btn-success" th:href="@{/cart/create_order}">Make order</a>-->
+</div>
+</body>
+</html>

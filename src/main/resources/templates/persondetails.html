@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Products</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="container">-->
+<!--    <h1>Product</h1>-->
+<!--    <span th:text="${selectProduct}"/>-->
+<!--</div>-->
+
+<head>
+    <meta charset="utf-8"/>
+    <title>Application</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1>Person details</h1>
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>City</th>
+            <td></td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr >
+            <td th:text="${selectPerson.id}"/>
+            <td th:text="${selectPerson.firstname}"/>
+            <td th:text="${selectPerson.lastname}"/>
+            <td th:text="${selectPerson.city}"/>
+            <td><a class="btn btn-danger" th:href="@{'/person/delete/' + ${selectPerson.id}}">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>

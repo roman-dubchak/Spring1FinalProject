@@ -1,0 +1,40 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+   http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+
+    <changeSet author="dubchak" id="create table cart_product" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="cart_product"/>
+            </not>
+        </preConditions>
+        <createTable tableName="cart_product">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="product_id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create ForeignKey product_id" author="dubchak">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="cart_product"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="product_id"
+                                 baseTableName="cart_product"
+                                 constraintName="fk_cart_product_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product_liq"/>
+    </changeSet>
+
+</databaseChangeLog>

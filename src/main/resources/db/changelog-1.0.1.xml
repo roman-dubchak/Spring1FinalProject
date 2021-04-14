@@ -1,0 +1,40 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+   http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+
+    <changeSet author="dubchak" id="create table Product_Liq" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="product_liq"/>
+            </not>
+        </preConditions>
+        <createTable tableName="product_liq">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="dubchak" id="create_20_products" runOnChange="true">
+        <comment>Create 20 products</comment>
+        <sql>insert into product_liq (title, price)
+            values ('apple', 20), ('onion', 10), ('tomato', 50), ('chess', 80), ('lentils', 83),
+            ('carrot', 17), ('potato', 30), ('milk', 35), ('juice', 90), ('curd', 38),
+            ('brad', 19), ('lemon', 13), ('cucumber', 80), ('yogurt', 42), ('cabbage', 19),
+            ('pear', 60), ('pepper', 67), ('buckwheat', 38), ('rice', 57), ('tangerine', 69)
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
